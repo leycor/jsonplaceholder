@@ -12,22 +12,30 @@ const Posts = () => {
     const [loading, setLoading] = useState(true)
 
     // Enviar petición al cargar el componente
+
+    // const getPosts = async() => {
+    //     let newPosts = []
+    //     const resp = await fetch('https://jsonplaceholder.typicode.com/posts')
+        
+    // }
     
-    const getUserId = async(id) => {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-        const data = await response.json()
-        return data.name
-    }
+     
+   useEffect( () => {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+        .then(data => data.forEach(post => {
+            fetch(`https://jsonplaceholder.typicode.com/users/${post.userId}`)
+                .then(r => r.json())
+                .then(usuario => {
+                    post.userId = usuario.name;
+                    setPosts(oldPosts => [...oldPosts, post])
+                });
+        }))
+        setLoading(false);
+
+        return 
+    }, []);
     
-    const getFetch = async( ) => {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts')
-        const dataPosts = await response.json()
-        return dataPosts
-    }
-    
-    useEffect(() => {
-        console.log( getUserId(1) )
-    },[])
 
     return(
         <section className='container px-10 mx-auto'>
@@ -37,6 +45,7 @@ const Posts = () => {
                 ? ( <p className='p-2 bg-blue-400 text-white text-center font-medium'>Loading data...</p> )
                 : 
                 (
+                    
                     posts.map( ({id, userId, title, body}) => 
                         <ContentPost
                         key={id}
