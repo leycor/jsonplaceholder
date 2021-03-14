@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const User = () => {
 
     return(
-        <h1>Detalle de usuario</h1>
+        <section className='container px-10 mx-auto'>
+            
+        </section>
     );
 }
 
