@@ -7,32 +7,34 @@ import {
     Route,
 } from "react-router-dom";
 
-// Pages
-import Posts from '../pages/Posts';
-import Post from '../pages/Post';
-import Users from '../pages/Users';
-import User from '../pages/User';
-
 // Molecules
 import Nav from '../molecules/Nav';
+import AllPosts from '../pages/AllPosts';
+import DetailPost from '../pages/DetailPost';
+import AllUsers from '../pages/AllUsers';
+import DetailUser from '../pages/DetailUser';
 
-const MainRouter = () => (
+const MainRouter = () => {
+
+    return(
+        <Router>
+            <Fragment>
+                {/* Menú de navegación */}
+                <Nav />
+                {/* Dirección de rutas */}
+                <Switch>
+                    <Route exact path='/' component={AllPosts}></Route>
+                    <Route exact path='/posts/:id' component={DetailPost}></Route>
+                    <Route exact path='/users' component={AllUsers}></Route>
+                    <Route exact path='/users/:id' component={DetailUser}></Route>
+                    <Redirect to="/" />
+                </Switch>
+            </Fragment>
+        </Router>
+    );
+
+}
 
 
-    <Router>
-        <Fragment>
-            {/* Menú de navegación */}
-            <Nav />
-            {/* Dirección de rutas */}
-            <Switch>
-                <Route exact path='/' component={Posts}></Route>
-                <Route exact path='/posts/:id' component={Post}></Route>
-                <Route exact path='/users' component={Users}></Route>
-                <Route exact path='/users/:id' component={User}></Route>
-                <Redirect to="/" />
-            </Switch>
-        </Fragment>
-    </Router>
-)
 
 export default MainRouter
