@@ -17,7 +17,7 @@ import DetailUser from '../pages/DetailUser';
 const MainRouter = () => {
 
     return(
-        <Router>
+        <Router basename='/jsonplaceholder'>
             <Fragment>
                 {/* Menú de navegación */}
                 <Nav />

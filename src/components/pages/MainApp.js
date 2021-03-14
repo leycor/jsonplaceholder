@@ -35,9 +35,6 @@ const MainApp = () => {
         getData()
     },[])
 
-
-
-
     return(
         <Fragment>
             {
